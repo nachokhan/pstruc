@@ -1,5 +1,6 @@
 import os
 import json
+import argparse
 import sys
 
 
@@ -53,17 +54,12 @@ def generate_directory_structure(start_path, output_file):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        start_path = os.getcwd()
-        output_file = os.path.basename(os.getcwd()) + '.json'
-    elif len(sys.argv) == 2:
-        start_path = sys.argv[1]
-        output_file = os.path.basename(start_path) + '.json'
-    else:
-        start_path = sys.argv[1]
-        output_file = sys.argv[2]
+    parser = argparse.ArgumentParser(description="Generate a directory structure in JSON format.")
+    parser.add_argument("directory", nargs="?", default=os.getcwd(), help="The directory to inspect.")
+    parser.add_argument("-o", "--output", help="The output JSON file name.")
 
-    # Convierte la ruta relativa a una ruta absoluta si es necesario
-    start_path = os.path.abspath(start_path)
+    args = parser.parse_args()
 
-    generate_directory_structure(start_path, output_file)
+    start_path = args.directory
+    output_file = args.output
+
