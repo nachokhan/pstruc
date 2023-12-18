@@ -25,6 +25,10 @@ def read_gitignore(start_path):
 
 
 def generate_directory_structure(start_path, output_file):
+    if not os.path.exists(start_path):
+        print(f"Error: The specified directory '{start_path}' does not exist.")
+        return
+
     structure = {}
     to_ignore = read_gitignore(start_path)
 
