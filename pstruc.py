@@ -51,12 +51,15 @@ def generate_directory_structure(start_path, output_file):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         start_path = os.getcwd()
-        output_file = os.path.basename(start_path) + '.json'
+        output_file = os.path.basename(os.getcwd()) + '.json'
     elif len(sys.argv) == 2:
         start_path = sys.argv[1]
         output_file = os.path.basename(start_path) + '.json'
     else:
         start_path = sys.argv[1]
         output_file = sys.argv[2]
+
+    # Convierte la ruta relativa a una ruta absoluta si es necesario
+    start_path = os.path.abspath(start_path)
 
     generate_directory_structure(start_path, output_file)
