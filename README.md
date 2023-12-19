@@ -17,7 +17,7 @@ A command-line tool for generating directory structures in different formats. Th
 📦 Easily configurable and customizable.
 
 ## Installation
-
+(still not installable 🫠) 
 To install the Directory Structure Generator, you can use `pip`:
 
 ```
