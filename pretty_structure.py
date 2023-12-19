@@ -5,14 +5,14 @@ from colorama import init, Fore, Style
 init(autoreset=True)
 
 
-def _parse_structure(structure_str):
-    try:
-        return json.loads(structure_str)
-    except json.JSONDecodeError:
-        return None
-
-
 def pretty_print(structure, indentation=""):
+    """
+    Pretty-print a directory structure.
+
+    Args:
+        structure (str or dict): The directory structure to print.
+        indentation (str): The current indentation level.
+    """
 
     if isinstance(structure, str):
         structure = _parse_structure(structure)
@@ -24,3 +24,19 @@ def pretty_print(structure, indentation=""):
             else:
                 print(indentation + f"- {Fore.BLUE}{key}{Style.RESET_ALL}:")
                 pretty_print(value, indentation + "  ")
+
+
+def _parse_structure(structure_str):
+    """
+    Parse a directory structure from a JSON-formatted string.
+
+    Args:
+        structure_str (str): The JSON-formatted structure string.
+
+    Returns:
+        dict: The parsed directory structure.
+    """
+    try:
+        return json.loads(structure_str)
+    except json.JSONDecodeError:
+        return None

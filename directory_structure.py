@@ -4,6 +4,19 @@ import yaml
 
 
 def generate_directory_structure(start_path, output_format="json"):
+    """
+    Generate a directory structure for the specified directory.
+
+    Args:
+        start_path (str): The directory to inspect.
+        output_format (str): The desired output format ('json', 'yaml', or 'txt').
+
+    Returns:
+        str: The directory structure in the specified format.
+
+    Raises:
+        FileNotFoundError: If the specified directory does not exist.
+    """
     try:
         if not os.path.exists(start_path):
             raise FileNotFoundError(f"The specified directory '{start_path}' does not exist.")
@@ -39,6 +52,16 @@ def generate_directory_structure(start_path, output_format="json"):
 
 
 def save_structure_to_file(output_file, structure):
+    """
+    Save the directory structure to a file.
+
+    Args:
+        output_file (str): The name of the output file.
+        structure (str): The directory structure content to be saved.
+
+    Returns:
+        str: An error message if an error occurs during file saving; otherwise, None.
+    """
     try:
         with open(output_file, 'w') as file:
             file.write(structure)
@@ -48,6 +71,15 @@ def save_structure_to_file(output_file, structure):
 
 
 def _read_gitignore(start_path):
+    """
+    Read patterns from a .gitignore file in the specified directory.
+
+    Args:
+        start_path (str): The directory to read .gitignore from.
+
+    Returns:
+        list: List of patterns to be ignored.
+    """
     gitignore_path = os.path.join(start_path, ".gitignore")
     to_ignore = [
         ".env",
@@ -69,6 +101,16 @@ def _read_gitignore(start_path):
 
 
 def _generate_txt_structure(structure, indentation):
+    """
+    Generate a plain text representation of the directory structure.
+
+    Args:
+        structure (dict): The directory structure.
+        indentation (str): The current indentation level.
+
+    Returns:
+        str: The plain text representation of the directory structure.
+    """
     result = ""
     for key, value in structure.items():
         if value is None:
