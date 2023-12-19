@@ -4,8 +4,8 @@ import sys
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, project_root)
 
-from directory_structure import generate_directory_structure
-from pretty_structure import pretty_print
+from _directory_structure import generate_directory_structure
+from _pretty_structure import pretty_print
 
 
 if __name__ == "__main__":

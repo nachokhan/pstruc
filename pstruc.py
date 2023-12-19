@@ -1,9 +1,9 @@
 import argparse
 import os
 import sys
-from directory_structure import generate_directory_structure
-from directory_structure import save_structure_to_file
-from pretty_structure import pretty_print
+from _directory_structure import generate_directory_structure as get_project_structure
+from _directory_structure import save_structure_to_file
+from _pretty_structure import pretty_print
 
 
 if __name__ == "__main__":
@@ -35,12 +35,12 @@ if __name__ == "__main__":
     elif output_format == "txt":
         output_file += '.txt'
 
-    structure = generate_directory_structure(start_path, output_format)
+    structure = get_project_structure(start_path, output_format)
 
     if structure is not None:
 
         if args.print:
-            print_strcuture = generate_directory_structure(start_path, "json")
+            print_strcuture = get_project_structure(start_path, "json")
             pretty_print(print_strcuture)
 
         if "Error" in structure:
