@@ -3,34 +3,13 @@ import json
 import yaml
 
 
-def read_gitignore(start_path):
-    gitignore_path = os.path.join(start_path, ".gitignore")
-    to_ignore = [
-        ".env",
-        "__pycache__",
-        ".pytest_cache",
-        ".vscode",
-        ".git",
-    ]
-
-    if os.path.exists(gitignore_path):
-        with open(gitignore_path, "r") as gitignore_file:
-            lines = gitignore_file.readlines()
-            for line in lines:
-                line = line.strip()
-                if line and not line.startswith("#"):
-                    to_ignore.append(line)
-
-    return to_ignore
-
-
 def generate_directory_structure(start_path, output_format="json"):
     try:
         if not os.path.exists(start_path):
             raise FileNotFoundError(f"The specified directory '{start_path}' does not exist.")
 
         structure = {}
-        to_ignore = read_gitignore(start_path)
+        to_ignore = _read_gitignore(start_path)
 
         for dirpath, dirnames, filenames in os.walk(start_path):
             for r in to_ignore:
@@ -53,21 +32,10 @@ def generate_directory_structure(start_path, output_format="json"):
         elif output_format == "yaml":
             return yaml.dump(structure, default_flow_style=False)
         elif output_format == "txt":
-            return generate_txt_structure(structure, "")
+            return _generate_txt_structure(structure, "")
 
     except Exception as e:
         return f"Error: {str(e)}"
-
-
-def generate_txt_structure(structure, indentation):
-    result = ""
-    for key, value in structure.items():
-        if value is None:
-            result += indentation + f"- {key}\n"
-        else:
-            result += indentation + f"- {key}:\n"
-            result += generate_txt_structure(value, indentation + "  ")
-    return result
 
 
 def save_structure_to_file(output_file, structure):
@@ -77,3 +45,35 @@ def save_structure_to_file(output_file, structure):
         return None  # No error occurred
     except Exception as e:
         return f"Error: {str(e)}"
+
+
+def _read_gitignore(start_path):
+    gitignore_path = os.path.join(start_path, ".gitignore")
+    to_ignore = [
+        ".env",
+        "__pycache__",
+        ".pytest_cache",
+        ".vscode",
+        ".git",
+    ]
+
+    if os.path.exists(gitignore_path):
+        with open(gitignore_path, "r") as gitignore_file:
+            lines = gitignore_file.readlines()
+            for line in lines:
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    to_ignore.append(line)
+
+    return to_ignore
+
+
+def _generate_txt_structure(structure, indentation):
+    result = ""
+    for key, value in structure.items():
+        if value is None:
+            result += indentation + f"- {key}\n"
+        else:
+            result += indentation + f"- {key}:\n"
+            result += _generate_txt_structure(value, indentation + "  ")
+    return result
