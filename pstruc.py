@@ -3,13 +3,16 @@ import os
 import sys
 from directory_structure import generate_directory_structure
 from directory_structure import save_structure_to_file
+from pretty_structure import pretty_print
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a directory structure in different formats.")
     parser.add_argument("directory", nargs="?", default=os.getcwd(), help="The directory to inspect.")
     parser.add_argument("-o", "--output", help="The output file name.")
-    parser.add_argument("-f", "--format", choices=["json", "yaml", "txt"], default="json", help="The output file format.")
+    parser.add_argument("-f", "--format", choices=["json", "yaml", "txt"], default="yaml", help="The output file format.")
+    parser.add_argument("-p", "--print", action="store_true", help="Print the directory structure without saving it.")
+    parser.add_argument("-ns", "--not-save", action="store_true", help="Structure won't be saved in output file.")
 
     args = parser.parse_args()
 
@@ -35,13 +38,17 @@ if __name__ == "__main__":
     structure = generate_directory_structure(start_path, output_format)
 
     if structure is not None:
+
+        if args.print:
+            pretty_print(structure)
+
         if "Error" in structure:
             print(structure)  # Print the error message
             sys.exit(1)
         else:
-            # If called from the command line, create the output file
-            error = save_structure_to_file(output_file, structure)
-            if error:
-                print(error)  # Print the error message
-            else:
-                print(f"Directory structure has been generated and saved to '{output_file}'.")
+            if not args.not_save:
+                error = save_structure_to_file(output_file, structure)
+                if error:
+                    print(error)  # Print the error message
+                else:
+                    print(f"Directory structure has been generated and saved to '{output_file}'.")
