@@ -68,7 +68,7 @@ Please note that this project is released with a Contributor Code of Conduct. By
 - Add tests for new features
 - Run tests to ensure your changes don't break existing functionality
   ```
-  python -m unittest
+  python -m pytest
   ```
 
 ## 📚 Documentation
