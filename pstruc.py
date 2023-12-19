@@ -40,7 +40,8 @@ if __name__ == "__main__":
     if structure is not None:
 
         if args.print:
-            pretty_print(structure)
+            print_strcuture = generate_directory_structure(start_path, "json")
+            pretty_print(print_strcuture)
 
         if "Error" in structure:
             print(structure)  # Print the error message
