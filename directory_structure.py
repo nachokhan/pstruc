@@ -25,35 +25,38 @@ def read_gitignore(start_path):
 
 
 def generate_directory_structure(start_path, output_format="json"):
-    if not os.path.exists(start_path):
-        print(f"Error: The specified directory '{start_path}' does not exist.")
-        return None
+    try:
+        if not os.path.exists(start_path):
+            raise FileNotFoundError(f"The specified directory '{start_path}' does not exist.")
 
-    structure = {}
-    to_ignore = read_gitignore(start_path)
+        structure = {}
+        to_ignore = read_gitignore(start_path)
 
-    for dirpath, dirnames, filenames in os.walk(start_path):
-        for r in to_ignore:
-            if r in dirnames:
-                dirnames.remove(r)
+        for dirpath, dirnames, filenames in os.walk(start_path):
+            for r in to_ignore:
+                if r in dirnames:
+                    dirnames.remove(r)
 
-        current_dir = structure
-        path_components = os.path.relpath(dirpath, start_path).split(os.path.sep)
+            current_dir = structure
+            path_components = os.path.relpath(dirpath, start_path).split(os.path.sep)
 
-        for component in path_components:
-            if component not in current_dir:
-                current_dir[component] = {}
-            current_dir = current_dir[component]
+            for component in path_components:
+                if component not in current_dir:
+                    current_dir[component] = {}
+                current_dir = current_dir[component]
 
-        for filename in filenames:
-            current_dir[filename] = None
+            for filename in filenames:
+                current_dir[filename] = None
 
-    if output_format == "json":
-        return json.dumps(structure, indent=4)
-    elif output_format == "yaml":
-        return yaml.dump(structure, default_flow_style=False)
-    elif output_format == "txt":
-        return generate_txt_structure(structure, "")
+        if output_format == "json":
+            return json.dumps(structure, indent=4)
+        elif output_format == "yaml":
+            return yaml.dump(structure, default_flow_style=False)
+        elif output_format == "txt":
+            return generate_txt_structure(structure, "")
+
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 
 def generate_txt_structure(structure, indentation):
@@ -68,5 +71,9 @@ def generate_txt_structure(structure, indentation):
 
 
 def save_structure_to_file(output_file, structure):
-    with open(output_file, 'w') as file:
-        file.write(structure)
+    try:
+        with open(output_file, 'w') as file:
+            file.write(structure)
+        return None  # No error occurred
+    except Exception as e:
+        return f"Error: {str(e)}"

@@ -34,6 +34,12 @@ if __name__ == "__main__":
     structure = generate_directory_structure(start_path, output_format)
 
     if structure is not None:
-        # If called from the command line, create the output file
-        save_structure_to_file(output_file, structure)
-        print(f"Directory structure has been generated and saved to '{output_file}'.")
+        if "Error" in structure:
+            print(structure)  # Print the error message
+        else:
+            # If called from the command line, create the output file
+            error = save_structure_to_file(output_file, structure)
+            if error:
+                print(error)  # Print the error message
+            else:
+                print(f"Directory structure has been generated and saved to '{output_file}'.")
