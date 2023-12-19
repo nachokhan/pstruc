@@ -1,5 +1,6 @@
 import argparse
 import os
+import sys
 from directory_structure import generate_directory_structure
 from directory_structure import save_structure_to_file
 
@@ -36,6 +37,7 @@ if __name__ == "__main__":
     if structure is not None:
         if "Error" in structure:
             print(structure)  # Print the error message
+            sys.exit(1)
         else:
             # If called from the command line, create the output file
             error = save_structure_to_file(output_file, structure)
