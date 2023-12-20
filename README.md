@@ -24,7 +24,7 @@ To install the Directory Structure Generator, you can use `pip`:
 pip install directory-structure-generator
 ```
 
-## Usage
+## CLI Usage
 
 ### Basic Usage
 
@@ -115,6 +115,73 @@ Will generate a JSON representation of the directory structure.
   }
 }
 ```
+
+
+## 📚 Library Usage
+
+In addition to being a command-line tool, `pstruc` can also be used as a library in your own Python projects. This allows you to integrate directory structure generation and manipulation directly into your scripts or applications.
+
+### 🛠️ Available Functions
+
+The `pstruc` library offers the following key functions for use in your projects:
+
+#### 🔍 `get_project_structure`
+Generates a directory structure for a specified directory.
+
+**Parameters:**
+- `start_path (str)`: The directory to inspect.
+- `output_format (str)`: The desired output format ('json', 'yaml', or 'txt').
+
+**Returns:** 
+- `str`: The directory structure in the specified format.
+
+**Example:**
+
+```python
+from pstruc import get_project_structure
+
+structure = get_project_structure('/path/to/directory', 'json')
+print(structure)
+```
+
+#### 💾 `save_structure_to_file`
+Saves the directory structure to a file.
+
+**Parameters:**
+- `output_file (str)`: The name of the output file.
+- `structure (str)`: The directory structure content to be saved.
+
+**Returns:**
+- `None` or `str`: An error message if an error occurs; otherwise, `None`.
+
+**Example:**
+
+```python
+from pstruc import save_structure_to_file
+
+error = save_structure_to_file('output.json', structure)
+if error:
+    print(f"Error saving file: {error}")
+```
+
+#### 🎨 `pretty_print`
+Pretty-prints a directory structure.
+
+**Parameters:**
+- `structure (str or dict)`: The directory structure to print.
+- `indentation (str)`: The current indentation level.
+
+**Example:**
+
+```python
+from pstruc import pretty_print
+
+pretty_print(structure)
+```
+
+### ⚙️ Advanced Integration
+
+You can integrate these functions into your Python applications to dynamically generate, save, and display directory structures. This is particularly useful for building tools that require a clear understanding of project layouts or for automating documentation tasks.
 
 
 ## Documentation
