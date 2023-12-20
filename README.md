@@ -119,7 +119,7 @@ Will generate a JSON representation of the directory structure.
 
 ## Documentation
 
-For detailed documentation and examples, please refer to the [Wiki](https://github.com/nachokhan/project-structure/wiki).
+For detailed documentation and examples, please refer to the [Wiki](https://github.com/nachokhan/pstruc/wiki).
 
 ## Contributing
 
@@ -142,11 +142,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-If you encounter any issues or have questions, please [open an issue](https://github.com/nachokhan/project-structure/issues).
+If you encounter any issues or have questions, please [open an issue](https://github.com/nachokhan/pstruc/issues).
 
 ## Roadmap
 
-See the [open issues](https://github.com/nachokhan/project-structure/issues) for a list of proposed features and known issues.
+See the [open issues](https://github.com/nachokhan/pstruc/issues) for a list of proposed features and known issues.
 
 ## Changelog
 

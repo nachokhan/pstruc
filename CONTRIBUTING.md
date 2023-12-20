@@ -7,7 +7,7 @@
 
 ### 🐞 Reporting Issues
 
-- **Check Existing Issues**: Before creating a new issue, please check if it's already reported. Use the search bar at the top of the [issues page](https://github.com/nachokhan/project-structure/issues) :
+- **Check Existing Issues**: Before creating a new issue, please check if it's already reported. Use the search bar at the top of the [issues page](https://github.com/nachokhan/pstruc/issues) :
 
 - **Provide Detailed Information**: When reporting issues, include as much detail as possible. Use this template to help you :
 
@@ -25,7 +25,7 @@
 
 - **Fork the Repository**: Create your own fork of the code with :
   ```
-  git fork https://github.com/nachokhan/project-structure
+  git fork https://github.com/nachokhan/pstruc
   ```
 
 - **Create a Branch**: Make your changes in a new git branch :
