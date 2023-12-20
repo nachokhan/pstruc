@@ -1,10 +1,8 @@
-# Project Name
-
-📂 Directory Structure Generator
+# 📂 Project Structure Generator
 
 ## Overview
 
-A command-line tool for generating directory structures in different formats. This tool allows you to inspect a directory and create a structured representation of its contents in JSON, YAML, or plain text. You can also pretty-print the structure with colorful output.
+A library and command-line tool for getting directory structures in different formats. This tool allows you to inspect a directory and create a structured representation of its contents in JSON, YAML, or plain text. You can also pretty-print the structure with colorful output.
 
 ## Features
 
@@ -18,10 +16,10 @@ A command-line tool for generating directory structures in different formats. Th
 
 ## Installation
 (still not installable 🫠) 
-To install the Directory Structure Generator, you can use `pip`:
+To install the package, you can use `pip`:
 
 ```
-pip install directory-structure-generator
+pip install pstruc
 ```
 
 ## CLI Usage
