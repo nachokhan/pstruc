@@ -9,6 +9,9 @@
 name: PYPI Upload Python Package
 
 on:
+  push:
+    branches:
+      - prod
   release:
     types: [published]
   workflow_dispatch:
