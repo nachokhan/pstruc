@@ -1,9 +1,9 @@
 import argparse
 import os
 import sys
-from _directory_structure import generate_directory_structure as get_project_structure
-from _directory_structure import save_structure_to_file
-from _pretty_structure import pretty_print
+from pstrucsrc._directory_structure import generate_directory_structure as get_project_structure
+from pstrucsrc._directory_structure import save_structure_to_file
+from pstrucsrc._pretty_structure import pretty_print
 
 
 if __name__ == "__main__":

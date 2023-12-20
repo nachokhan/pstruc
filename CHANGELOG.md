@@ -8,10 +8,18 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Add future features or changes here.
 
-## [1.0.0] - 2023-12-19
+## [0.1.2] - 2023-12-19
 ### Added
 - Initial release of the project.
 - `pretty_print` method for colorful output.
+
+## [0.1.3] - 2023-12-19
+### Changed
+- Moved main file.
+
+
+
+### SCHEMA
 
 ### Changed
 - List any changes to existing features here.
