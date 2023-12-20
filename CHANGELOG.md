@@ -21,6 +21,10 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated info in Readme.
 
+## [0.1.5] - 2023-12-120
+### Changed
+- Updated relase.
+
 
 ### SCHEMA
 
