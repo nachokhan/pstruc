@@ -1,6 +1,6 @@
 import os
 import pytest
-from pstruc._directory_structure import generate_directory_structure
+from pstrucsrc._directory_structure import generate_directory_structure
 
 
 def test_generate_directory_structure_valid_directory():
