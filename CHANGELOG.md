@@ -25,6 +25,13 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated relase.
 
+## [0.1.5] - 2023-12-120
+### Changed
+- Release on push to prod.
+
+### Fixed
+- Main methods can be imported directly from package.
+
 
 ### SCHEMA
 
