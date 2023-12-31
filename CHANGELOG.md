@@ -17,20 +17,25 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Moved main file.
 
-## [0.1.4] - 2023-12-120
+## [0.1.4] - 2023-12-20
 ### Changed
 - Updated info in Readme.
 
-## [0.1.5] - 2023-12-120
+## [0.1.5] - 2023-12-20
 ### Changed
 - Updated relase.
 
-## [0.1.5] - 2023-12-120
+## [0.1.6] - 2023-12-21
 ### Changed
 - Release on push to prod.
 
 ### Fixed
 - Main methods can be imported directly from package.
+
+## [0.2.0] - 2023-12-31
+### Changed
+- Added new option: Add more ignore-patterns for patterns not included in .gitignore
+- Added new option: Add list of file-patterns to include the content of those files that match these patterns.
 
 
 ### SCHEMA
