@@ -13,19 +13,17 @@ if __name__ == "__main__":
     output_format = "json"
 
     # Optional: Specify additional files/folders to ignore
-    ignore_patterns = ["*.png", "*.md", "*req*", "pstruc.egg-info", ".git", "LICENSE", "dist", "test", "examples", ".github", "*ignore*"]
+    ignore_patterns = ["*.png", "*CHANGE*", "CONTRIB*", "*req*", "pstruc.egg-info", ".git", "LICENSE", "dist", "test", "examples", ".github", "*ignore*"]
 
-    # Generate the directory structure
-    structure = get_project_structure(
-        ".",
-        output_format,
-        ignore_patterns,
-        file_content=["*.py"],
-    )
+    try:
+        # Generate the directory structure
+        structure = get_project_structure(
+            ".",
+            output_format,
+            ignore_patterns,
+            file_content=["*.py", "README.md"],
+        )
 
-    if "Error" in structure:
-        print(structure)  # Handle any errors
-    else:
         # Specify the output file name (optional)
         output_file = "output_structure.json"
 
@@ -35,3 +33,6 @@ if __name__ == "__main__":
             print(error)  # Handle any errors
         else:
             print(f"Directory structure has been generated and saved to '{output_file}'.")
+
+    except Exception as e:
+        print(e)  # Handle any errors
