@@ -14,7 +14,7 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--print", action="store_true", help="Print the directory structure without saving it.")
     parser.add_argument("-ns", "--not-save", action="store_true", help="Structure won't be saved in output file.")
     parser.add_argument("-ip", "--add-ignore-patterns", help="A comma-separated list of patterns to ignore (in addition to .gitignore).")
-    parser.add_argument("-fc", "--add-text-file-content", action="store_true", help="Include content of mime/text files (code, readmes, etc).")
+    parser.add_argument("-fc", "--add-content-file-patterns", help="A comma-separated list of patterns for files to add its content.")
 
     args = parser.parse_args()
 
