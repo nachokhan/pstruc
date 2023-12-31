@@ -5,36 +5,6 @@ import fnmatch
 from pstruc._file_structure import read_file
 
 
-def _read_ignore_patterns(start_path, additional_patterns=None):
-    """
-    Read patterns from a file (e.g., .gitignore) and include additional patterns.
-
-    Args:
-        start_path (str): The directory to read patterns from.
-        additional_patterns (list): List of additional patterns to include.
-
-    Returns:
-        list: List of patterns to be ignored.
-    """
-    to_ignore = []
-
-    # Read patterns from a file (e.g., .gitignore)
-    gitignore_path = os.path.join(start_path, ".gitignore")
-    if os.path.exists(gitignore_path):
-        with open(gitignore_path, "r") as gitignore_file:
-            lines = gitignore_file.readlines()
-            for line in lines:
-                line = line.strip()
-                if line and not line.startswith("#"):
-                    to_ignore.append(line)
-
-    # Include additional patterns
-    if additional_patterns:
-        to_ignore.extend(additional_patterns)
-
-    return to_ignore
-
-
 def generate_directory_structure(start_path, output_format="json", ignore_patterns=None, file_content=None):
     """
     Generate a directory structure for the specified directory.
@@ -43,6 +13,7 @@ def generate_directory_structure(start_path, output_format="json", ignore_patter
         start_path (str): The directory to inspect.
         output_format (str): The desired output format ('json', 'yaml', or 'txt').
         ignore_patterns (list): List of additional patterns to ignore.
+        file_content (list): List of patterns to determine which file content to include in the structure.
 
     Returns:
         str: The directory structure in the specified format.
@@ -74,8 +45,11 @@ def generate_directory_structure(start_path, output_format="json", ignore_patter
                 current_dir = current_dir[component]
 
             for filename in filenames:
-                content = read_file(os.path.join(dirpath, filename))
-                current_dir[filename] = content if file_content else None
+                if file_content and any(fnmatch.fnmatchcase(filename, pattern) for pattern in file_content):
+                    content = read_file(os.path.join(dirpath, filename))
+                    current_dir[filename] = content
+                else:
+                    current_dir[filename] = None
 
         if output_format == "json":
             formatted_structure = json.dumps(structure, indent=4)
@@ -107,6 +81,36 @@ def save_structure_to_file(output_file, structure):
         return None  # No error occurred
     except Exception as e:
         return f"Error: {str(e)}"
+
+
+def _read_ignore_patterns(start_path, additional_patterns=None):
+    """
+    Read patterns from a file (e.g., .gitignore) and include additional patterns.
+
+    Args:
+        start_path (str): The directory to read patterns from.
+        additional_patterns (list): List of additional patterns to include.
+
+    Returns:
+        list: List of patterns to be ignored.
+    """
+    to_ignore = []
+
+    # Read patterns from a file (e.g., .gitignore)
+    gitignore_path = os.path.join(start_path, ".gitignore")
+    if os.path.exists(gitignore_path):
+        with open(gitignore_path, "r") as gitignore_file:
+            lines = gitignore_file.readlines()
+            for line in lines:
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    to_ignore.append(line)
+
+    # Include additional patterns
+    if additional_patterns:
+        to_ignore.extend(additional_patterns)
+
+    return to_ignore
 
 
 def _generate_txt_structure(structure, indentation):
