@@ -61,7 +61,7 @@ def generate_directory_structure(start_path, output_format="json", ignore_patter
         return formatted_structure
 
     except Exception as e:
-        return f"Error: {str(e)}"
+        raise e
 
 
 def save_structure_to_file(output_file, structure):
