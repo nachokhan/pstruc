@@ -12,10 +12,14 @@ def is_text_file(file_name):
         bool: True if the file is a text file, False if it's binary.
     """
     try:
-        result = subprocess.check_output(["file", "--mime-type", file_name]).decode("utf-8")
-        return "text/plain" in result
+        with open(file_name, 'rb') as file:
+            # Read the first 1024 bytes from the file and check for binary characters
+            data = file.read(1024)
+            if b'\x00' in data:
+                return False
+            return True
     except Exception as e:
-        return str(e)
+        return False
 
 
 def read_file(file_name):

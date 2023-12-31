@@ -13,6 +13,8 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--format", choices=["json", "yaml", "txt"], default="yaml", help="The output file format.")
     parser.add_argument("-p", "--print", action="store_true", help="Print the directory structure without saving it.")
     parser.add_argument("-ns", "--not-save", action="store_true", help="Structure won't be saved in output file.")
+    parser.add_argument("-ip", "--add-ignore-patterns", help="A comma-separated list of patterns to ignore (in addition to .gitignore).")
+    parser.add_argument("-fc", "--add-text-file-content", action="store_true", help="Include content of mime/text files (code, readmes, etc).")
 
     args = parser.parse_args()
 
@@ -35,12 +37,21 @@ if __name__ == "__main__":
     elif output_format == "txt":
         output_file += '.txt'
 
-    structure = get_project_structure(start_path, output_format)
+    patterns_to_ignore = None
+
+    if args.add_ignore_patterns:
+        patterns_to_ignore = args.add_ignore_patterns.split(",")
+
+    file_content = False
+    if args.add_text_file_content:
+        file_content = args.add_text_file_content
+
+    structure = get_project_structure(start_path, output_format, patterns_to_ignore, file_content)
 
     if structure is not None:
 
         if args.print:
-            print_strcuture = get_project_structure(start_path, "json")
+            print_strcuture = get_project_structure(start_path, "json", patterns_to_ignore, file_content)
             pretty_print(print_strcuture)
 
         if "Error" in structure:
