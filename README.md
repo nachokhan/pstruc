@@ -1,4 +1,4 @@
-# 📂 Project Structure Generator
+# 📒 Project Structure Generator
 
 ## Overview
 
@@ -15,7 +15,7 @@ A library and command-line tool for getting directory structures in different fo
 📦 Easily configurable and customizable.
 
 ## Installation
-(still not installable 🫠) 
+(still not installable 🛠) 
 To install the package, you can use `pip`:
 
 ```
@@ -56,6 +56,24 @@ Exclude patterns specified in `.gitignore` when generating the structure:
 python pstruc.py /path/to/directory -f json
 ```
 
+Include content of specified files (code, readmes, etc):
+
+```
+python pstruc.py /path/to/directory -f [format] -fc [content file patterns]
+```
+
+Do not save the generated structure to an output file:
+
+```
+python pstruc.py /path/to/directory -ns
+```
+
+Add custom patterns to ignore in addition to .gitignore:
+
+```
+python pstruc.py /path/to/directory -ip "pattern1,pattern2"
+```
+
 For more options and details, run:
 
 ```
@@ -69,21 +87,22 @@ Suppose you have the following directory structure:
 ```
 my_project/
 ├── documents/
-│ ├── report.txt
-│ ├── proposal.docx
-│ └── presentation.pptx
+│   ├── report.txt
+│   ├── proposal.docx
+│   └── presentation.pptx
 ├── source_code/
-│ ├── main.py
-│ ├── utils/
-│ │ ├── helper.py
-│ │ └── constants.py
-│ └── tests/
-│ ├── test_main.py
-│ └── test_utils.py
+│   ├── main.py
+│   ├── utils/
+│   │   ├── helper.py
+│   │   └── constants.py
+│   └── tests/
+│       ├── test_main.py
+│       └── test_utils.py
 └── README.md
 ```
 
 Running the following command:
+
 ```
 python pstruc.py my_project -f json
 ```
@@ -114,12 +133,11 @@ Will generate a JSON representation of the directory structure.
 }
 ```
 
-
 ## 📚 Library Usage
 
 In addition to being a command-line tool, `pstruc` can also be used as a library in your own Python projects. This allows you to integrate directory structure generation and manipulation directly into your scripts or applications.
 
-### 🛠️ Available Functions
+### 🔧 Available Functions
 
 The `pstruc` library offers the following key functions for use in your projects:
 
@@ -129,6 +147,8 @@ Generates a directory structure for a specified directory.
 **Parameters:**
 - `start_path (str)`: The directory to inspect.
 - `output_format (str)`: The desired output format ('json', 'yaml', or 'txt').
+- `ignore_patterns (list)`: List of additional patterns to ignore.
+- `file_content (list)`: List of patterns to determine which file content to include in the structure.
 
 **Returns:** 
 - `str`: The directory structure in the specified format.
