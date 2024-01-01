@@ -37,6 +37,10 @@ All notable changes to this project will be documented in this file.
 - Added new option: Add more ignore-patterns for patterns not included in .gitignore
 - Added new option: Add list of file-patterns to include the content of those files that match these patterns.
 
+## [0.2.1] - 2024-01-01
+### Fixed
+- Error handling for file saving
+- Error in how add-file-content patterns were passed in the CLI.
 
 ### SCHEMA
 
