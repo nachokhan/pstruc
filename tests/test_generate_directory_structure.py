@@ -8,17 +8,17 @@ def test_generate_directory_structure_valid_directory():
     start_path = os.path.abspath(os.path.dirname(__file__))  # Use the current directory for testing
     structure = generate_directory_structure(start_path)
     assert structure is not None
-    assert "Error" not in structure  # No error should occur
     assert isinstance(structure, str)  # The result should be a string
 
 
 def test_generate_directory_structure_invalid_directory():
     # Test with an invalid directory
     invalid_path = "/invalid_directory_path"
-    structure = generate_directory_structure(invalid_path)
-    assert structure is not None
-    assert "Error" in structure  # An error should occur
-    assert isinstance(structure, str)  # The result should be a string
+    # Expecting a FileNotFoundError exception
+    with pytest.raises(FileNotFoundError) as excinfo:
+        generate_directory_structure(invalid_path)
+    # Assert that the exception message contains the invalid path
+    assert str(excinfo.value).find(invalid_path) != -1
 
 
 def test_generate_directory_structure_yaml_format():
@@ -26,7 +26,6 @@ def test_generate_directory_structure_yaml_format():
     start_path = os.path.abspath(os.path.dirname(__file__))  # Use the current directory for testing
     structure = generate_directory_structure(start_path, output_format="yaml")
     assert structure is not None
-    assert "Error" not in structure  # No error should occur
     assert isinstance(structure, str)  # The result should be a string
 
 
@@ -35,7 +34,6 @@ def test_generate_directory_structure_txt_format():
     start_path = os.path.abspath(os.path.dirname(__file__))  # Use the current directory for testing
     structure = generate_directory_structure(start_path, output_format="txt")
     assert structure is not None
-    assert "Error" not in structure  # No error should occur
     assert isinstance(structure, str)  # The result should be a string
 
 
@@ -44,7 +42,6 @@ def test_generate_directory_structure_json_format():
     start_path = os.path.abspath(os.path.dirname(__file__))  # Use the current directory for testing
     structure = generate_directory_structure(start_path, output_format="json")
     assert structure is not None
-    assert "Error" not in structure  # No error should occur
     assert isinstance(structure, str)  # The result should be a string
     assert structure.startswith("{")
     assert structure.endswith("}")
