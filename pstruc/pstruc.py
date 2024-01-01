@@ -43,24 +43,22 @@ if __name__ == "__main__":
         patterns_to_ignore = args.add_ignore_patterns.split(",")
 
     file_content = False
-    if args.add_text_file_content:
-        file_content = args.add_text_file_content
+    if args.add_content_file_patterns:
+        file_content = args.add_content_file_patterns.split(",")
 
-    structure = get_project_structure(start_path, output_format, patterns_to_ignore, file_content)
+    try:
 
-    if structure is not None:
+        structure = get_project_structure(start_path, output_format, patterns_to_ignore, file_content)
 
-        if args.print:
-            print_strcuture = get_project_structure(start_path, "json", patterns_to_ignore, file_content)
-            pretty_print(print_strcuture)
+        if structure is not None:
 
-        if "Error" in structure:
-            print(structure)  # Print the error message
-            sys.exit(1)
-        else:
+            if args.print:
+                print_strcuture = get_project_structure(start_path, "json", patterns_to_ignore, file_content)
+                pretty_print(print_strcuture)
+
             if not args.not_save:
-                error = save_structure_to_file(output_file, structure)
-                if error:
-                    print(error)  # Print the error message
-                else:
-                    print(f"Directory structure has been generated and saved to '{output_file}'.")
+                save_structure_to_file(output_file, structure)
+                print(f"Directory structure has been generated and saved to '{output_file}'.")
+    except Exception as e:
+        print(f"Error: {e}")  # Print the error message
+        sys.exit(1)

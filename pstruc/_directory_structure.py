@@ -78,9 +78,9 @@ def save_structure_to_file(output_file, structure):
     try:
         with open(output_file, 'w') as file:
             file.write(structure)
-        return None  # No error occurred
+        return None
     except Exception as e:
-        return f"Error: {str(e)}"
+        raise e
 
 
 def _read_ignore_patterns(start_path, additional_patterns=None):
