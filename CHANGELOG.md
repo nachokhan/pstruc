@@ -46,6 +46,10 @@ All notable changes to this project will be documented in this file.
 ### Added Feature
 - Introduced command-line interface functionality for `pstruc`. Now users can directly execute `pstruc` as a command in the terminal to generate and analyze project file structures, without needing to run it through a Python script. This enhancement simplifies usage and improves accessibility for users preferring command-line tools.
 
+## [0.3.1] - 2023-01-17
+### Fixed
+- Small bug in main method.
+
 ### SCHEMA
 
 ### Changed
