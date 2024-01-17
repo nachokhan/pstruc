@@ -6,7 +6,7 @@ from pstruc._directory_structure import save_structure_to_file
 from pstruc._pretty_structure import pretty_print
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="Generate a directory structure in different formats.")
     parser.add_argument("directory", nargs="?", default=os.getcwd(), help="The directory to inspect.")
     parser.add_argument("-o", "--output", help="The output file name.")
@@ -62,3 +62,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error: {e}")  # Print the error message
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
