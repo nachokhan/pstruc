@@ -6,10 +6,23 @@ def get_all_ignore_patterns(
         files_with_ignore_patterns=[],
         extra_ignore_patterns=[]
 ):
+    """
+    Retrieves a combined list of ignore patterns from specified files and additional user-provided patterns.
+    
+    Args:
+        start_path (str, optional): The root directory path from where the search for ignore files begins. 
+                                    Defaults to None.
+        files_with_ignore_patterns (list of str): Filenames from which to read ignore patterns 
+                                                  (e.g., '.gitignore').
+        extra_ignore_patterns (list of str): Additional patterns provided by the user.
+
+    Returns:
+        list: A list of unique ignore patterns.
+    """
     to_ignore = []
 
     for file in files_with_ignore_patterns:
-        to_ignore.extend(read_ignore_patterns_from_file(start_path, file))
+        to_ignore.extend(_read_ignore_patterns_from_file(start_path, file))
 
     if extra_ignore_patterns:
         to_ignore.extend(extra_ignore_patterns)
@@ -20,7 +33,18 @@ def get_all_ignore_patterns(
     return to_ignore
 
 
-def read_ignore_patterns_from_file(start_path, file_with_ignore_patterns):
+def _read_ignore_patterns_from_file(start_path, file_with_ignore_patterns):
+    """
+    Reads and parses ignore patterns from a specified file, typically used for extracting patterns 
+    from files like '.gitignore'.
+
+    Args:
+        start_path (str): The base directory path to look for the ignore file.
+        file_with_ignore_patterns (str): The filename from which to read ignore patterns.
+
+    Returns:
+        list: A list of ignore patterns found in the specified file.
+    """
     to_ignore = []
 
     # Read patterns from a file (e.g., .gitignore)
