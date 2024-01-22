@@ -5,7 +5,7 @@ import fnmatch
 from pstruc._file_structure import read_file
 
 
-def generate_directory_structure(start_path, output_format="json", to_ignore=None, to_add_content=None):
+def generate_directory_structure(start_path, output_format="json", to_ignore=[], to_add_content=[]):
     """
     Generate a directory structure for the specified directory.
 
