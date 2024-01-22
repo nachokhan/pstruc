@@ -50,6 +50,13 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Small bug in main method.
 
+## [0.4.0] - 2023-01-22
+### Added Feature
+- "ignore-git-ignore" and "ingore-from-files" CLI argumetns.
+### Changed
+- Modofied internal code to separate file access responsabilities.
+- Enhanced README.md file
+
 ### SCHEMA
 
 ### Changed
