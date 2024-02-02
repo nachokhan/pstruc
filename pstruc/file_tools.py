@@ -10,8 +10,7 @@ def get_all_ignore_patterns(
     Retrieves a combined list of ignore patterns from specified files and additional user-provided patterns.
 
     Args:
-        start_path (str, optional): The root directory path from where the search for ignore files begins. 
-                                    Defaults to None.
+        start_path (str): The root directory path from where the search for ignore files begins.
         files_with_ignore_patterns (list of str): Filenames from which to read ignore patterns 
                                                   (e.g., '.gitignore').
         extra_ignore_patterns (list of str): Additional patterns provided by the user.

@@ -5,7 +5,7 @@ from colorama import init, Fore, Style
 init(autoreset=True)
 
 
-def pretty_print(structure, indentation=""):
+def pretty_print(structure, indentation="") -> None:
     """
     Pretty-print a directory structure.
 

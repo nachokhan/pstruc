@@ -13,7 +13,7 @@ def generate_directory_structure(start_path, output_format="json", to_ignore=[],
         start_path (str): The directory to inspect.
         output_format (str): The desired output format ('json', 'yaml', 'txt', 'dict').
         to_ignore (list): List of patterns to ignore.
-        file_content (list): List of patterns to determine which file content to include in the structure.
+        to_add_content (list): List of patterns to determine which file content to include in the structure.
 
     Returns:
         str: The directory structure in the specified format.
