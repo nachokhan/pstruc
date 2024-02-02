@@ -5,7 +5,7 @@
 Project Structure Generator is a versatile tool available both as a command-line interface and as a library. It enables users to generate directory structures in JSON, YAML, or plain text formats and offers the ability to pretty-print the structure with color.
 
 ## Features
-- Generate directory structures in JSON, YAML, or plain text.
+- Generate directory structures in JSON, YAML, Dictionary or plain text.
 - Exclude patterns specified in `.gitignore`.
 - Pretty-print the directory structure with colorful output.
 - Command-line interface for ease of use.
@@ -23,7 +23,7 @@ The `pstruc` tool supports various arguments for generating and customizing the 
 
 ### Arguments
 - `directory`: Specify the directory to inspect (_not specified: current directory_)
-- `-f`, `--format`: Choose the output format (json, yaml, txt).
+- `-f`, `--format`: Choose the output format (json, yaml, txt, dict).
 - `-o`, `--output`: Specify the output file name.
 - `-p`, `--print`: Print the directory structure without saving it.
 - `-ns`, `--not-save`: Do not save the generated structure to an output file.
@@ -57,9 +57,25 @@ pretty_print(structure)
 
 ## Library Available Methods
 - `get_project_structure(start_path, output_format, ignore_patterns, file_content)`: Generates the directory structure.
+  - `start_path (str)`: The directory to inspect.
+  - `output_format (str)`: The desired output format ('json', 'yaml', 'txt', 'dict').
+  - `ignore_patterns (list)`: List of patterns to ignore.
+  - `file_content (list)`: List of patterns to determine which file content to include in the structure.
+
 - `save_structure_to_file(output_file, structure)`: Saves the directory structure to a file.
+  - `output_file (str)`: The name of the output file.
+  - `structure (str)`: The directory structure content to be saved.
+
 - `pretty_print(structure)`: Pretty-prints the directory structure.
-- `get_all_ignore_patterns`: Get a list of all ignore patterns from files and lists.
+  - `structure (str or dict)`: The directory structure to print.
+  - `indentation (str)`: The current indentation level.
+
+- `get_all_ignore_patterns(start_path, files_with_ignore_patterns, extra_ignore_patterns)`: Retrieves a combined list of ignore patterns from specified files and additional user-provided patterns.
+  - `start_path (str)`: The root directory path from where the search for ignore files begins.
+  - `files_with_ignore_patterns (list of str)`: Filenames from which to read ignore patterns (e.g., '.gitignore').
+  - `extra_ignore_patterns (list of str)`: Additional patterns provided by the user.
+
+
 
 ## Contributing
 Contributions are welcome! Please follow our [Contributing Guidelines](CONTRIBUTING.md).
