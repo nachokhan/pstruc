@@ -2,16 +2,15 @@ import os
 
 
 def get_all_ignore_patterns(
-        start_path=None,
+        start_path,
         files_with_ignore_patterns=[],
         extra_ignore_patterns=[]
 ):
     """
     Retrieves a combined list of ignore patterns from specified files and additional user-provided patterns.
-    
+
     Args:
-        start_path (str, optional): The root directory path from where the search for ignore files begins. 
-                                    Defaults to None.
+        start_path (str): The root directory path from where the search for ignore files begins.
         files_with_ignore_patterns (list of str): Filenames from which to read ignore patterns 
                                                   (e.g., '.gitignore').
         extra_ignore_patterns (list of str): Additional patterns provided by the user.
@@ -35,8 +34,9 @@ def get_all_ignore_patterns(
 
 def _read_ignore_patterns_from_file(start_path, file_with_ignore_patterns):
     """
-    Reads and parses ignore patterns from a specified file, typically used for extracting patterns 
-    from files like '.gitignore'.
+    Reads and parses ignore patterns from a specified file.
+
+    This method is used for extracting patterns from files like '.gitignore'.
 
     Args:
         start_path (str): The base directory path to look for the ignore file.
@@ -47,9 +47,12 @@ def _read_ignore_patterns_from_file(start_path, file_with_ignore_patterns):
     """
     to_ignore = []
 
-    # Read patterns from a file (e.g., .gitignore)
-    result_path_file = os.path.join(start_path, file_with_ignore_patterns)
-    print("A ver:" + result_path_file)
+    # Check if file_with_ignore_patterns contains a path
+    if os.path.dirname(file_with_ignore_patterns):
+        result_path_file = file_with_ignore_patterns
+    else:
+        result_path_file = os.path.join(start_path, file_with_ignore_patterns)
+
     if os.path.exists(result_path_file):
         with open(result_path_file, "r") as path_file:
             lines = path_file.readlines()

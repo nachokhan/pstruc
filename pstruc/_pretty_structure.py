@@ -5,7 +5,7 @@ from colorama import init, Fore, Style
 init(autoreset=True)
 
 
-def pretty_print(structure, indentation=""):
+def pretty_print(structure, indentation="") -> None:
     """
     Pretty-print a directory structure.
 
@@ -30,11 +30,14 @@ def _parse_structure(structure_str):
     """
     Parse a directory structure from a JSON-formatted string.
 
+    This internal method is used to convert a JSON string into a dictionary representation 
+    of the directory structure.
+
     Args:
         structure_str (str): The JSON-formatted structure string.
 
     Returns:
-        dict: The parsed directory structure.
+        dict: The parsed directory structure, or None if parsing fails.
     """
     try:
         return json.loads(structure_str)

@@ -11,9 +11,9 @@ def generate_directory_structure(start_path, output_format="json", to_ignore=[],
 
     Args:
         start_path (str): The directory to inspect.
-        output_format (str): The desired output format ('json', 'yaml', or 'txt').
+        output_format (str): The desired output format ('json', 'yaml', 'txt', 'dict').
         to_ignore (list): List of patterns to ignore.
-        file_content (list): List of patterns to determine which file content to include in the structure.
+        to_add_content (list): List of patterns to determine which file content to include in the structure.
 
     Returns:
         str: The directory structure in the specified format.
@@ -48,17 +48,24 @@ def generate_directory_structure(start_path, output_format="json", to_ignore=[],
                 else:
                     current_dir[filename] = None
 
-        if output_format == "json":
-            formatted_structure = json.dumps(structure, indent=4)
-        elif output_format == "yaml":
-            formatted_structure = yaml.dump(structure, default_flow_style=False)
-        elif output_format == "txt":
-            formatted_structure = _generate_txt_structure(structure, "")
+        formatted_structure = _format_structure(structure, output_format)
 
         return formatted_structure
 
     except Exception as e:
         raise e
+
+
+def _format_structure(structure, format):
+    formatted_structure = structure
+    if format == "json":
+        formatted_structure = json.dumps(structure, indent=4)
+    elif format == "yaml":
+        formatted_structure = yaml.dump(structure, default_flow_style=False)
+    elif format == "txt":
+        formatted_structure = _generate_txt_structure(structure, "")
+
+    return formatted_structure
 
 
 def save_structure_to_file(output_file, structure):
@@ -72,10 +79,13 @@ def save_structure_to_file(output_file, structure):
     Returns:
         str: An error message if an error occurs during file saving; otherwise, None.
     """
+
     try:
+        if isinstance(structure, dict):
+            structure = _format_structure(structure, "json")
+
         with open(output_file, 'w') as file:
             file.write(structure)
-        return None
     except Exception as e:
         raise e
 

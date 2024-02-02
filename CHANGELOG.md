@@ -57,6 +57,13 @@ All notable changes to this project will be documented in this file.
 - Modofied internal code to separate file access responsabilities.
 - Enhanced README.md file
 
+## [0.5.0] - 2023-02-02
+### Added Feature
+- New output format "dict" which will return a python dictionary of the structure.
+### Changed
+- Some docstrings were updated.
+- "to_ignore_files" will now add the project's path by default if path is not specified.
+
 ### SCHEMA
 
 ### Changed
