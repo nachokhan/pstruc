@@ -3,7 +3,7 @@ import json
 import yaml
 import fnmatch
 from pstruc._file_structure import read_file
-from pstruc.version import __version__
+from version import __version__
 
 
 def generate_directory_structure(start_path, output_format="json", to_ignore=[], to_add_content=[], args=None):
