@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=40.8.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+name = "pstruc"
+author = "Ignacio Rigoni"
+description = "Get a project file structure to analyze it"
+long_description = "file: README.md"
+long_description_content_type = "text/markdown"
+url = "https://github.com/nachokhan/pstruc"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+python_requires = ">=3.11.0"
+packages = ["pstruc"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pstruc.version.__version__"}
+
+[tool.setuptools.install_requires]
+dependencies = [
+    "colorama==0.4.6",
+    "PyYAML==6.0.1"
+]
+
+[tool.setuptools.extras_require]
+dev = ["pytest"]
