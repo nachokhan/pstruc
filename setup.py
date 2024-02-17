@@ -22,8 +22,9 @@ setup(
     ],
     packages=find_packages(),
     install_requires=[
-        'colorama',
-        'PyYAML'
+        'colorama==0.4.6',
+        'PyYAML==6.0.1',
+        'setuptools>=40.8.0',
     ],
     python_requires='>=3.11.0',
     include_package_data=True,
