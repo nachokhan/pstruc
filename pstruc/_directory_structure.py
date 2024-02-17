@@ -3,9 +3,10 @@ import json
 import yaml
 import fnmatch
 from pstruc._file_structure import read_file
+from pstruc.version import __version__
 
 
-def generate_directory_structure(start_path, output_format="json", to_ignore=[], to_add_content=[]):
+def generate_directory_structure(start_path, output_format="json", to_ignore=[], to_add_content=[], args=None):
     """
     Generate a directory structure for the specified directory.
 
@@ -48,12 +49,71 @@ def generate_directory_structure(start_path, output_format="json", to_ignore=[],
                 else:
                     current_dir[filename] = None
 
-        formatted_structure = _format_structure(structure, output_format)
+        structure_metadata = _get_metadata(start_path, to_ignore, to_add_content, args)
 
-        return formatted_structure
+        result = {
+            "metadata": structure_metadata,
+            "structure": structure
+        }
+
+        formatted_result = _format_structure(result, output_format)
+
+        return formatted_result
 
     except Exception as e:
         raise e
+
+
+def _get_metadata(start_path, to_ignore, to_add_content, args):
+    prompt = None
+
+    # Add both lists.
+    options = {
+        "files_ignored_patterns": to_ignore,
+        "fileS_content_added_patterns": to_add_content,
+    }
+
+    # Only if it was called from bash, add the rest.
+    if args:
+        options['bash_options'] = {
+            "format": args.format,
+            "directory": args.directory,
+            "output": args.output,
+            "ignore_patterns": args.add_ignore_patterns.split(",") if args.add_ignore_patterns else None,
+            "ignore_files": args.ignore_from_files.split(",") if args.ignore_from_files else None,
+            "ignore_gitignore": args.ignore_git_ignore,
+            "file_add_content": args.add_content_file_patterns.split(",") if args.add_content_file_patterns else None,
+        }
+        # Create the prompt based on key: bash_options
+        prompt_parts = ["pstruc"]
+        if options["bash_options"]["directory"]:
+            prompt_parts.append(options["bash_options"]["directory"])
+        if options["bash_options"]["output"]:
+            prompt_parts.append(f"-o {options['bash_options']['output']}")
+        if options["bash_options"]["format"]:
+            prompt_parts.append(f"-f {options['bash_options']['format']}")
+
+        # For list elements, join them with ',' and enclose each element in single quotes
+        if options["bash_options"]["ignore_patterns"]:
+            ignore_patterns = ",".join(f"'{pattern}'" for pattern in options["bash_options"]["ignore_patterns"])
+            prompt_parts.append(f"-ip {ignore_patterns}")
+        if options["bash_options"]["ignore_files"]:
+            ignore_files = ",".join(f"'{file}'" for file in options["bash_options"]["ignore_files"])
+            prompt_parts.append(f"-iff {ignore_files}")
+        if options["bash_options"]["ignore_gitignore"]:
+            prompt_parts.append("-igi")
+        if options["bash_options"]["file_add_content"]:
+            file_add_content = ",".join(f"'{pattern}'" for pattern in options["bash_options"]["file_add_content"])
+            prompt_parts.append(f"-fc {file_add_content}")
+
+        prompt = " ".join(prompt_parts)
+
+    return {
+        "project_name": os.path.basename(os.path.normpath(start_path)),
+        "pstruc_version": __version__,
+        "prompt": prompt,
+        "options": options,
+    }
 
 
 def _format_structure(structure, format):

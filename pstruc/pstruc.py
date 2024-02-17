@@ -72,7 +72,8 @@ def main():
             start_path,
             output_format,
             to_ignore,
-            file_content
+            file_content,
+            args
         )
 
         if structure is not None:
@@ -89,7 +90,8 @@ def main():
                 save_structure_to_file(output_file, structure)
                 print(f"Directory structure has been generated and saved to '{output_file}'.")
     except Exception as e:
-        print(f"Error: {e}")  # Print the error message
+        print(f"Error: {e}")
+        raise e
         sys.exit(1)
 
 
