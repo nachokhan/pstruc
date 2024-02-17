@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pstruc"
-version = "attr: pstruc.version.__version__"
+version = "attr: version.__version__"
 description = "Get a project file structure to analyze it"
 readme = "README.md"
 authors = [{name = "Ignacio Rigoni"}]
