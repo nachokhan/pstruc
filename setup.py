@@ -1,5 +1,17 @@
 from setuptools import setup, find_packages
-from .version import __version__
+
+
+# setup.py
+from setuptools import setup, find_packages
+
+# Read version from version.py
+version = {}
+with open("version.py") as fp:
+    exec(fp.read(), version)
+
+# Read the long description from README.md
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 
 # Read the long description from README.md
@@ -9,7 +21,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='pstruc',
-    version=__version__,
+    version=version['__version__'],
     author='Ignacio Rigoni',
     description='Get a project file structure to analyze it',
     long_description=long_description,
