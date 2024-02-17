@@ -1,5 +1,5 @@
-import subprocess
 import os
+
 
 def is_text_file(file_name):
     """
@@ -19,6 +19,7 @@ def is_text_file(file_name):
                 return False
             return True
     except Exception as e:
+        print(e)
         return False
 
 
