@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from version import __version__
+from .version import __version__
 
 
 # Read the long description from README.md
