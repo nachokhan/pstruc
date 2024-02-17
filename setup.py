@@ -23,6 +23,10 @@ setup(
     packages=find_packages(),
     install_requires=[
         'colorama==0.4.6',
+        'iniconfig==2.0.0',
+        'packaging==23.2',
+        'pluggy==1.3.0',
+        'pytest==7.4.3',
         'PyYAML==6.0.1',
         'setuptools>=40.8.0',
     ],
