@@ -1,13 +1,15 @@
 from setuptools import setup, find_packages
+import os
 
-
-# setup.py
-from setuptools import setup, find_packages
+# Define the path to version.py
+base_dir = os.path.abspath(os.path.dirname(__file__))
+version_file = os.path.join(base_dir, 'version.py')
 
 # Read version from version.py
 version = {}
-with open("version.py") as fp:
+with open(version_file) as fp:
     exec(fp.read(), version)
+
 
 # Read the long description from README.md
 with open("README.md", "r", encoding="utf-8") as fh:
