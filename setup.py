@@ -1,7 +1,5 @@
 from setuptools import setup, find_packages
-
-
-__version__ = "1.0.0"
+from pstruc.version import __version__
 
 # Read the long description from README.md
 with open("README.md", "r", encoding="utf-8") as fh:

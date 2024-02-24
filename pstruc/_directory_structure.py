@@ -3,7 +3,7 @@ import json
 import yaml
 import fnmatch
 from pstruc._file_structure import read_file
-from setup import __version__
+from pstruc.version import __version__
 
 
 def generate_directory_structure(start_path, output_format="json", to_ignore=[], to_add_content=[], args=None):
@@ -22,7 +22,6 @@ def generate_directory_structure(start_path, output_format="json", to_ignore=[],
     Raises:
         FileNotFoundError: If the specified directory does not exist.
     """
-    formatted_structure = None
     try:
         if not os.path.exists(start_path):
             raise FileNotFoundError(f"The specified directory '{start_path}' does not exist.")
