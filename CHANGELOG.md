@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - Planned features or upcoming changes will be listed here.
 
+## [1.0.1] - 2024-02-24
+### Fixed
+- Problem with version in metadata. Version was removed for the moment.
+
 ## [1.0.0] - 2024-02-17
 ### Added
 - Metadata field at the same level as the project structure, including information on ignored patterns, prompt options used, and the `pstruc` version.
